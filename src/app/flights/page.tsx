@@ -56,13 +56,18 @@ function EditableCell({
       contentEditable
       suppressContentEditableWarning
       spellCheck={false}
-      className="block w-full outline-none bg-transparent"
+      className="
+        block w-full outline-none px-2 py-1
+        bg-white text-black
+        dark:bg-zinc-800 dark:text-orange-100
+        rounded
+        ring-2 ring-inset ring-orange-200 dark:ring-orange-700
+        focus:ring-2 focus:ring-orange-500 transition
+        "
       style={{
         minWidth: 0,
         width: "100%",
         font: "inherit",
-        color: "inherit",
-        background: "transparent",
         whiteSpace: "nowrap",
         overflowX: "auto",
         verticalAlign: "middle"
@@ -172,7 +177,7 @@ export default function FlightsPage() {
   };
 
   return (
-    <Card className="flex-1 min-h-0 flex flex-col h-full"> {/* Fills parent, no vh */}
+    <Card className="flex-1 min-h-0 flex flex-col h-full">
       <CardContent className="flex-1 min-h-0 flex flex-col">
         <div className="flex justify-start mb-2 flex-wrap items-center">
           <div className="flex gap-2">
@@ -206,20 +211,19 @@ export default function FlightsPage() {
             </button>
           </div>
         </div>
-        {/* === Table wrapper: always fills rest of Card, no gap at bottom === */}
         <div className="flex-1 min-h-0 overflow-y-auto overflow-x-auto rounded-lg">
-        <Table className="w-full min-w-max">
+          <Table className="w-full min-w-max">
             <TableHeader>
               <TableRow>
                 {columns.map((col) => (
                   <TableHead
                     key={col.accessor}
-                    className="font-bold sticky top-0 bg-gray-100 dark:bg-gray-800 z-10 whitespace-nowrap"
+                    className="font-bold sticky top-0 bg-gray-100 dark:bg-zinc-900 z-10 whitespace-nowrap"
                   >
                     {col.header}
                   </TableHead>
                 ))}
-                <TableHead className="font-bold sticky top-0 bg-gray-100 dark:bg-gray-800 z-10 whitespace-nowrap">
+                <TableHead className="font-bold sticky top-0 bg-gray-100 dark:bg-zinc-900 z-10 whitespace-nowrap">
                   Actions
                 </TableHead>
               </TableRow>
@@ -232,7 +236,7 @@ export default function FlightsPage() {
                     key={row.uuid}
                     className={
                       isEditing
-                        ? "bg-orange-50 hover:bg-orange-100 transition-colors"
+                        ? "bg-orange-50 dark:bg-orange-900 hover:bg-orange-100 dark:hover:bg-orange-800 transition-colors"
                         : "even:bg-muted/20 hover:bg-muted/40 transition-colors"
                     }
                   >
@@ -262,14 +266,14 @@ export default function FlightsPage() {
                     {isEditing ? (
                       <TableCell key={`actions-edit-${row.uuid}`}>
                         <button
-                          className="p-1 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                          className="p-1 rounded hover:bg-zinc-100 dark:hover:bg-orange-800"
                           onClick={() => handleEditSave(row.uuid)}
                           title="Save"
                         >
                           <Check size={18} />
                         </button>
                         <button
-                          className="ml-2 p-1 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                          className="ml-2 p-1 rounded hover:bg-zinc-100 dark:hover:bg-orange-800"
                           onClick={handleEditCancel}
                           title="Cancel"
                         >
@@ -279,14 +283,14 @@ export default function FlightsPage() {
                     ) : (
                       <TableCell key={`actions-view-${row.uuid}`}>
                         <button
-                          className="p-1 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                          className="p-1 rounded hover:bg-zinc-100 dark:hover:bg-orange-800"
                           onClick={() => handleEdit(row, idx)}
                           title="Edit"
                         >
                           <Pencil size={18} />
                         </button>
                         <button
-                          className="ml-2 p-1 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                          className="ml-2 p-1 rounded hover:bg-zinc-100 dark:hover:bg-orange-800"
                           onClick={() => handleDelete(row.uuid)}
                           title="Delete"
                         >
