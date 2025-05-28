@@ -1,0 +1,44 @@
+/* dashboard-print.css */
+@media print {
+  /* Set page size and orientation, allow user to change */
+  @page {
+    size: auto;      /* or: portrait or landscape, but auto lets user pick */
+    margin: 1cm;
+  }
+
+  /* Remove navigation and buttons from print */
+  header, nav, aside, .AppSidebar, .sidebar, .print-hide, .printHide,
+  #dashboard-content button,
+  #dashboard-content select {
+    display: none !important;
+  }
+
+  /* Print only the dashboard content */
+  body * {
+    visibility: hidden !important;
+  }
+  #dashboard-content, #dashboard-content * {
+    visibility: visible !important;
+  }
+  #dashboard-content {
+    position: static !important;
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    color: #000 !important;
+    overflow: visible !important;
+  }
+
+  /* Prevent page breaks inside cards and charts */
+  #dashboard-content .card,
+  #dashboard-content [data-slot="card"],
+  #dashboard-content .chart-container,
+  #dashboard-content .recharts-wrapper {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}
